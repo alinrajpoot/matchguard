@@ -13,7 +13,7 @@ beforeEach(() => {
 describe('app shell', () => {
   it('redirects unauthenticated users to login', async () => {
     render(<App />)
-    expect(await screen.findByRole('button', { name: /sign in to matchguard/i })).toBeInTheDocument()
+    expect(await screen.findByLabelText(/work email/i)).toBeInTheDocument()
   })
 
   it('renders navigation for an authenticated user', async () => {
