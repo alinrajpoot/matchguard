@@ -5,6 +5,7 @@ describe('format helpers', () => {
   it('formats money with two decimals and separators', () => {
     expect(money(25055)).toBe('$25,055.00')
     expect(money(470)).toBe('$470.00')
+    expect(money(-470)).toBe('-$470.00')
   })
 
   it('formats percentages to one decimal by default', () => {

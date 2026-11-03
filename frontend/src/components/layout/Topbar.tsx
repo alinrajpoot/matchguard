@@ -32,6 +32,7 @@ export function Topbar() {
       <Button
         className="bg-gradient-to-b from-[#5850ec] to-primary text-white hover:bg-primary/90"
         size="xs"
+        aria-label="Assistant"
         onClick={toggleAssistant}
       >
         <Sparkles /> <span className="hidden min-[640px]:inline">Assistant</span>

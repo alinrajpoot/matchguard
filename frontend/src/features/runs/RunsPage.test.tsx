@@ -60,4 +60,14 @@ describe('match runs', () => {
     expect(await screen.findByRole('dialog')).toBeInTheDocument()
     expect(screen.getByText('LangGraph trace')).toBeInTheDocument()
   })
+
+  it('activates a row with the keyboard', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    const row = (await screen.findByText('MR-2025-1041')).closest('tr')!
+    row.focus()
+    await user.keyboard('{Enter}')
+    expect(await screen.findByRole('dialog')).toBeInTheDocument()
+    expect(screen.getByText('LangGraph trace')).toBeInTheDocument()
+  })
 })

@@ -1,9 +1,10 @@
-export const money = (n: number) =>
-  '$' +
-  Number(n).toLocaleString('en-US', {
+export const money = (n: number) => {
+  const sign = Number(n) < 0 ? '-' : ''
+  return sign + '$' + Math.abs(Number(n)).toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })
+}
 
 export const pct = (n: number, digits = 1) => `${n.toFixed(digits)}%`
 

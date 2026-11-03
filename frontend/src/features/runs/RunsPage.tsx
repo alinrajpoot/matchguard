@@ -67,10 +67,14 @@ export default function RunsPage() {
     .filter((run) => vendor === 'all' || run.vendor === vendor)
     .filter((run) => !query || `${run.id} ${run.invoice} ${run.po} ${run.grn} ${run.vendor}`.toLowerCase().includes(query))
 
-  const openRow = (event: MouseEvent<HTMLTableRowElement>, run: Run) => {
-    if ((event.target as HTMLElement).closest('button, a')) return
+  const open = (run: Run) => {
     if (run.status === 'hitl') navigate(`/review/${run.id}`)
     else setOpenRunId(run.id)
+  }
+
+  const openRow = (event: MouseEvent<HTMLTableRowElement>, run: Run) => {
+    if ((event.target as HTMLElement).closest('button, a')) return
+    open(run)
   }
 
   return (
@@ -153,7 +157,18 @@ export default function RunsPage() {
               </TableRow>
             )}
             {filtered.map((run) => (
-              <TableRow key={run.id} className="cursor-pointer" onClick={(event) => openRow(event, run)}>
+              <TableRow
+                key={run.id}
+                tabIndex={0}
+                className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                onClick={(event) => openRow(event, run)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    open(run)
+                  }
+                }}
+              >
                 <TableCell>
                   <div className="font-semibold text-accent-foreground">{run.id}</div>
                 </TableCell>
