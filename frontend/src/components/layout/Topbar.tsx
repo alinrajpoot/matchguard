@@ -1,23 +1,19 @@
-import { Bell, LogOut, Menu, Settings } from 'lucide-react'
+import { Bell, LogOut, Menu, Settings, Sparkles } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { GlobalSearch } from '@/components/search/GlobalSearch'
 import { useNotifications } from '@/hooks/queries'
-import { seedTitles } from '@/mock/seed'
+import { titleForPath } from '@/lib/constants'
+import { useAssistantStore } from '@/stores/assistant-store'
 import { useAuthStore } from '@/stores/auth-store'
 import { useUiStore } from '@/stores/ui-store'
-
-function titleFor(pathname: string) {
-  if (pathname.startsWith('/review')) return 'Match Review'
-  const key = pathname.split('/')[1] ?? 'dashboard'
-  return seedTitles[key] ?? 'Dashboard'
-}
 
 export function Topbar() {
   const location = useLocation()
   const navigate = useNavigate()
   const setSidebarOpen = useUiStore((s) => s.setSidebarOpen)
+  const toggleAssistant = useUiStore((s) => s.toggleAssistant)
   const signOut = useAuthStore((s) => s.signOut)
   const { data: notifications } = useNotifications()
   const unread = notifications?.filter((n) => n.unread).length ?? 0
@@ -28,11 +24,18 @@ export function Topbar() {
         <Menu />
       </Button>
       <div className="flex min-w-0 items-center gap-2">
-        <h2 className="truncate text-sm font-semibold">{titleFor(location.pathname)}</h2>
+        <h2 className="truncate text-sm font-semibold">{titleForPath(location.pathname)}</h2>
         <Badge variant="info" className="hidden min-[900px]:inline-flex">Demo data</Badge>
       </div>
       <div className="flex-1" />
       <div className="hidden min-[900px]:block"><GlobalSearch /></div>
+      <Button
+        className="bg-gradient-to-b from-[#5850ec] to-primary text-white hover:bg-primary/90"
+        size="xs"
+        onClick={toggleAssistant}
+      >
+        <Sparkles /> <span className="hidden min-[640px]:inline">Assistant</span>
+      </Button>
       <Button asChild variant="ghost" size="iconSm" className="relative" aria-label="Notifications">
         <Link to="/notifications">
           <Bell />
@@ -49,7 +52,11 @@ export function Topbar() {
       <Button
         variant="outline"
         size="xs"
-        onClick={() => { signOut(); navigate('/login') }}
+        onClick={() => {
+          signOut()
+          useAssistantStore.getState().reset()
+          navigate('/login')
+        }}
       >
         <LogOut /> <span className="hidden min-[640px]:inline">Log out</span>
       </Button>

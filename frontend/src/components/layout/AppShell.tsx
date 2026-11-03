@@ -1,9 +1,20 @@
-import { Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
+import { AssistantDrawer } from '@/components/assistant/AssistantDrawer'
 import { InfraDialog } from '@/components/shared/InfraDialog'
+import { titleForPath } from '@/lib/constants'
+import { useAssistantStore } from '@/stores/assistant-store'
 
 export function AppShell() {
+  const setContext = useAssistantStore((state) => state.setContext)
+  const location = useLocation()
+
+  useEffect(() => {
+    setContext(titleForPath(location.pathname))
+  }, [location.pathname, setContext])
+
   return (
     <div className="min-h-svh">
       <Sidebar />
@@ -14,6 +25,7 @@ export function AppShell() {
         </main>
       </div>
       <InfraDialog />
+      <AssistantDrawer />
     </div>
   )
 }
