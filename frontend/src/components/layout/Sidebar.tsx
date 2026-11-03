@@ -1,11 +1,11 @@
-import { Activity, LayoutDashboard, ReceiptText, Files, GitCompare, UserCheck, SlidersHorizontal, ScrollText } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { seedNav, seedTitles } from '@/mock/seed'
 import { useQueue } from '@/hooks/queries'
-import { useUiStore } from '@/stores/ui-store'
 import { cn } from '@/lib/utils'
+import { seedNav, seedTitles } from '@/mock/seed'
+import { useUiStore } from '@/stores/ui-store'
+import { Files, GitCompare, LayoutDashboard, ReceiptText, ScrollText, SlidersHorizontal, UserCheck } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
 const NAV_ICONS: Record<string, typeof LayoutDashboard> = {
   dashboard: LayoutDashboard, documents: Files, invoices: ReceiptText,
@@ -20,8 +20,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
       <div className="flex h-12 items-center gap-2 border-b px-3.5">
-        <Activity className="size-5 text-primary" />
-        <span className="text-[15px] font-bold tracking-[-0.01em]">MatchGuard</span>
+        <img src="/logo.png" alt="MatchGuard" className="h-10" />
       </div>
       <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-2 py-2">
         {seedNav.map((item, index) => {
