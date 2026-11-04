@@ -3,7 +3,7 @@ export function ConfidenceBar({ value }: { value: number }) {
 
   return (
     <span className="inline-flex items-center gap-[5px]">
-      <span className="text-[10.5px] tabular-nums">{Math.round(value)}%</span>
+      <span className="text-[13px] tabular-nums">{Math.round(value)}%</span>
       <span className="h-1 w-[38px] overflow-hidden rounded-full bg-muted" aria-hidden="true">
         <span
           className="block h-full rounded-full"

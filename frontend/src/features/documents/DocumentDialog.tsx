@@ -1,19 +1,19 @@
-import { Cloud, Download, ExternalLink, FileText } from 'lucide-react'
-import { toast } from 'sonner'
+import { KeyValueList } from '@/components/shared/KeyValueList'
+import { StatusBadge } from '@/components/shared/StatusBadge'
+import { TypeBadge } from '@/components/shared/TypeBadge'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { KeyValueList } from '@/components/shared/KeyValueList'
-import { StatusBadge } from '@/components/shared/StatusBadge'
-import { TypeBadge } from '@/components/shared/TypeBadge'
 import { money } from '@/lib/format'
 import { mimeOf, s3Key } from '@/lib/s3'
 import { seedLines } from '@/mock/seed'
 import type { Document } from '@/schemas/domain'
 import { useUiStore } from '@/stores/ui-store'
+import { Cloud, Download, ExternalLink, FileText } from 'lucide-react'
+import { toast } from 'sonner'
 
 const S3_CONSOLE_URL = 'https://s3.console.aws.amazon.com/s3/buckets/matchguard-demo-documents'
 
@@ -44,13 +44,13 @@ function PreviewPaper({ doc }: { doc: Document }) {
     : [buyer, '4120 Westfield Industrial Parkway, Columbus, OH 43228']
 
   return (
-    <div className="mx-auto max-w-[700px] border border-[#d0d5dd] bg-white px-[30px] py-[26px] font-serif text-[10.5px] text-[#111] shadow-[0_8px_24px_-16px_rgba(0,0,0,0.3)]">
+    <div className="mx-auto max-w-[700px] border border-[#d0d5dd] bg-white px-[30px] py-[26px] font-serif text-[13px] text-[#111] shadow-[0_8px_24px_-16px_rgba(0,0,0,0.3)]">
       <div className="mb-[9px] flex justify-between gap-5 border-b-2 border-[#333] pb-2">
         <div>
           <h4 className="m-0 text-[16px] tracking-[0.06em]">{letterhead[0]}</h4>
-          <div className="mt-[3px] text-[9px]">{letterhead[1]}</div>
+          <div className="mt-[3px] text-[12px]">{letterhead[1]}</div>
         </div>
-        <div className="text-right text-[9.5px] leading-[1.5]">
+        <div className="text-right text-[12px] leading-[1.5]">
           <b>{DOC_TITLE[doc.type]}</b>
           <br />
           {docNo}
@@ -59,7 +59,7 @@ function PreviewPaper({ doc }: { doc: Document }) {
         </div>
       </div>
 
-      <div className="my-2 grid grid-cols-2 gap-[9px] text-[9.5px] leading-[1.45]">
+      <div className="my-2 grid grid-cols-2 gap-[9px] text-[12px] leading-[1.45]">
         <div className="border border-[#999] px-[7px] py-1.5">
           <b>{partyLabel}</b>
           <div>{party[0]}</div>
@@ -73,7 +73,7 @@ function PreviewPaper({ doc }: { doc: Document }) {
         </div>
       </div>
 
-      <table className="my-2 w-full border-collapse text-[9.5px]">
+      <table className="my-2 w-full border-collapse text-[12px]">
         <thead>
           <tr>
             <th className="border border-[#999] bg-[#eee] px-[5px] py-[3px] text-left">#</th>
@@ -102,7 +102,7 @@ function PreviewPaper({ doc }: { doc: Document }) {
         </tbody>
       </table>
 
-      <table className="my-1 ml-auto w-[44%] border-collapse text-[9.5px]">
+      <table className="my-1 ml-auto w-[44%] border-collapse text-[12px]">
         <tbody>
           <tr>
             <td className="border border-[#999] px-[5px] py-[3px]">Subtotal</td>
@@ -119,7 +119,7 @@ function PreviewPaper({ doc }: { doc: Document }) {
         </tbody>
       </table>
 
-      <div className="mt-2.5 border-t border-[#999] pt-[5px] text-[8.5px] text-[#555]">
+      <div className="mt-2.5 border-t border-[#999] pt-[5px] text-[12px] text-[#555]">
         Synthetic demo document · MatchGuard IDP extraction preview · No legal or financial value.
       </div>
     </div>
@@ -137,7 +137,7 @@ export function DocumentDialog({ doc, onOpenChange }: {
       {doc && (
         <DialogContent className="max-h-[90vh] gap-0 overflow-hidden p-0 sm:max-w-[860px]">
           <DialogHeader className="flex-row flex-wrap items-center gap-2 border-b px-4 py-3 pr-10">
-            <DialogTitle className="flex items-center gap-2 text-[13px] font-semibold">
+            <DialogTitle className="flex items-center gap-2 text-[15px] font-semibold">
               <FileText className="size-4" />
               {doc.file}
             </DialogTitle>
@@ -162,14 +162,14 @@ export function DocumentDialog({ doc, onOpenChange }: {
 
               <TabsContent value="fields" className="pt-1">
                 <div className="rounded-lg border bg-card">
-                  <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
-                    <h3 className="text-[12.5px] font-semibold">NER / IDP extraction</h3>
+                  <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
+                    <h3 className="text-[15px] font-semibold">NER / IDP extraction</h3>
                     <Badge variant={doc.confidence > 0.85 ? 'success' : 'warning'}>
                       {Math.round(doc.confidence * 100)}% confidence
                     </Badge>
                   </div>
                   <div className="p-3">
-                    <KeyValueList items={[
+                    <KeyValueList dtWidth="150px" items={[
                       ['Document type', TYPE_LABEL[doc.type]],
                       ['Vendor', doc.vendor],
                       ['Document number', doc.docNo || '—'],
@@ -178,8 +178,8 @@ export function DocumentDialog({ doc, onOpenChange }: {
                       ['Extraction confidence', `${Math.round(doc.confidence * 100)}%`],
                       ['Pinecone chunks', doc.pinecone],
                       ['Linked match', doc.matchId || '—'],
-                      ['S3 object', <span key="s3" className="mono text-[10px]">{s3Key(doc)}</span>],
-                      ['SHA-256', <span key="sha" className="mono text-[10px]">9f2c…{doc.id.slice(-4)}</span>],
+                      ['S3 object', <span key="s3" className="mono text-[12.5px]">{s3Key(doc)}</span>],
+                      ['SHA-256', <span key="sha" className="mono text-[12.5px]">9f2c…{doc.id.slice(-4)}</span>],
                       ['MIME', mimeOf(doc.file)],
                     ]} />
                   </div>
@@ -187,7 +187,7 @@ export function DocumentDialog({ doc, onOpenChange }: {
               </TabsContent>
 
               <TabsContent value="json" className="pt-1">
-                <pre className="mono overflow-auto rounded-md bg-[#0f172a] p-2.5 text-[10px] leading-[1.5] whitespace-pre-wrap text-[#e2e8f0]">
+                <pre className="mono overflow-auto rounded-md bg-[#01173e] p-2.5 text-[12.5px] leading-[1.5] whitespace-pre-wrap text-[#dce7f7]">
                   {JSON.stringify({
                     id: doc.id,
                     file: doc.file,

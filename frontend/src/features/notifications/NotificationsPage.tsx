@@ -80,18 +80,18 @@ export default function NotificationsPage() {
               key={notification.id}
               type="button"
               onClick={() => open(notification)}
-              className="flex w-full gap-[10px] border-b bg-card px-3 py-[10px] text-left last:border-0 hover:bg-[#fafbfc]"
+              className="flex w-full gap-3 border-b bg-card px-4 py-3 text-left transition-colors last:border-0 hover:bg-muted/50"
             >
               <span className={cn('flex size-[30px] flex-none items-center justify-center rounded-[7px]', TONE_TILE[notification.tone])}>
                 <Icon className="size-4" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[11.5px] font-semibold">{notification.title}</span>
-                <span className="mt-px block whitespace-normal text-[10.5px] text-muted-foreground">
+                <span className="block text-[13px] font-semibold">{notification.title}</span>
+                <span className="mt-px block whitespace-normal text-[13px] text-muted-foreground">
                   {notification.body}
                 </span>
               </span>
-              <span className="whitespace-nowrap text-[9.5px] text-muted-foreground/70">
+              <span className="whitespace-nowrap text-[12px] text-muted-foreground/70">
                 {notification.time}
               </span>
               <span

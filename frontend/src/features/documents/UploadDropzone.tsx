@@ -32,8 +32,8 @@ export function UploadDropzone({ onFiles, onBrowse, onLoadSample, sampleLoading 
         <span className="mx-auto mb-[7px] flex size-[34px] items-center justify-center rounded-lg bg-accent text-primary">
           <UploadCloud className="size-5" />
         </span>
-        <span className="block text-[12.5px] font-semibold">Drop files here, or click to browse</span>
-        <span className="mt-0.5 block text-[10.5px] text-muted-foreground">
+        <span className="block text-[15px] font-semibold">Drop files here, or click to browse</span>
+        <span className="mt-0.5 block text-[13px] text-muted-foreground">
           Single or batch upload · PDF, XLSX, CSV, HTML, PNG · max 20 MB each
         </span>
       </button>
@@ -44,7 +44,7 @@ export function UploadDropzone({ onFiles, onBrowse, onLoadSample, sampleLoading 
         <Button variant="outline" size="xs" disabled={sampleLoading} onClick={onLoadSample}>
           <RefreshCw />Load sample batch
         </Button>
-        <span className="self-center text-[10px] text-muted-foreground">or drag and drop</span>
+        <span className="self-center text-[12.5px] text-muted-foreground">or drag and drop</span>
       </div>
     </div>
   )

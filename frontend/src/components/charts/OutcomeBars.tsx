@@ -17,10 +17,10 @@ export function OutcomeBars({ data }: { data: Outcome[] }) {
     <>
       <div className="mb-[7px] flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-[12.5px] font-semibold">Match outcomes</h3>
-          <div className="mt-px text-[10px] text-muted-foreground">Daily volume, last 30 days · 1,284 matches</div>
+          <h3 className="text-[15px] font-semibold">Match outcomes</h3>
+          <div className="mt-px text-[12.5px] text-muted-foreground">Daily volume, last 30 days · 1,284 matches</div>
         </div>
-        <div className="flex flex-wrap gap-[10px] text-[9.5px] text-secondary-foreground">
+        <div className="flex flex-wrap gap-[10px] text-[12px] text-secondary-foreground">
           {SEGMENTS.map((seg) => (
             <span key={seg.key}>
               <i className="mr-1 inline-block size-1.5 rounded-[2px]" style={{ background: seg.color }} />
@@ -47,32 +47,32 @@ export function OutcomeBars({ data }: { data: Outcome[] }) {
           </div>
         ))}
       </div>
-      <div className="mt-1 flex justify-between text-[9px] text-muted-foreground/70" aria-hidden="true">
+      <div className="mt-1 flex justify-between text-[12px] text-muted-foreground/70" aria-hidden="true">
         <span>Mar 1</span>
         <span>Mar 8</span>
         <span>Mar 15</span>
         <span>Mar 22</span>
         <span>Mar 30</span>
       </div>
-      <Collapsible open={showData} onOpenChange={setShowData} className="mt-[7px] text-[10px] text-muted-foreground">
+      <Collapsible open={showData} onOpenChange={setShowData} className="mt-[7px] text-[12.5px] text-muted-foreground">
         <CollapsibleTrigger className="cursor-pointer select-none">View data table</CollapsibleTrigger>
         <CollapsibleContent>
           <table className="mt-1 w-full border-collapse">
             <thead>
               <tr>
-                <th className="border-b px-1 py-0.5 text-left text-[9.5px]">Day</th>
-                <th className="border-b px-1 py-0.5 text-right text-[9.5px]">Auto</th>
-                <th className="border-b px-1 py-0.5 text-right text-[9.5px]">After review</th>
-                <th className="border-b px-1 py-0.5 text-right text-[9.5px]">Rejected</th>
+                <th className="border-b px-1 py-0.5 text-left text-[12px]">Day</th>
+                <th className="border-b px-1 py-0.5 text-right text-[12px]">Auto</th>
+                <th className="border-b px-1 py-0.5 text-right text-[12px]">After review</th>
+                <th className="border-b px-1 py-0.5 text-right text-[12px]">Rejected</th>
               </tr>
             </thead>
             <tbody>
               {data.map((d) => (
                 <tr key={d.d}>
-                  <td className="border-b px-1 py-0.5 text-left text-[9.5px]">{d.d}</td>
-                  <td className="border-b px-1 py-0.5 text-right text-[9.5px]">{d.a}</td>
-                  <td className="border-b px-1 py-0.5 text-right text-[9.5px]">{d.h}</td>
-                  <td className="border-b px-1 py-0.5 text-right text-[9.5px]">{d.r}</td>
+                  <td className="border-b px-1 py-0.5 text-left text-[12px]">{d.d}</td>
+                  <td className="border-b px-1 py-0.5 text-right text-[12px]">{d.a}</td>
+                  <td className="border-b px-1 py-0.5 text-right text-[12px]">{d.h}</td>
+                  <td className="border-b px-1 py-0.5 text-right text-[12px]">{d.r}</td>
                 </tr>
               ))}
             </tbody>

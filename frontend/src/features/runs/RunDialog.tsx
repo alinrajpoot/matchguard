@@ -12,7 +12,7 @@ import { useRun } from '@/hooks/queries'
 import { money } from '@/lib/format'
 import { useUiStore } from '@/stores/ui-store'
 
-const HEAD = 'text-[12.5px] font-semibold'
+const HEAD = 'text-[15px] font-semibold'
 
 export function RunDialog({ runId, onOpenChange }: {
   runId: string | null
@@ -27,7 +27,7 @@ export function RunDialog({ runId, onOpenChange }: {
       {runId && (
         <DialogContent className="max-h-[90vh] gap-0 overflow-hidden p-0 sm:max-w-[760px]">
           <DialogHeader className="flex-row flex-wrap items-center gap-2 border-b px-4 py-3 pr-10">
-            <DialogTitle className="text-[13px] font-semibold">{runId}</DialogTitle>
+            <DialogTitle className="text-[15px] font-semibold">{runId}</DialogTitle>
             {data && <StatusBadge status={data.run.status} />}
             {data && <Badge variant="neutral">{data.run.vendor}</Badge>}
           </DialogHeader>
@@ -40,7 +40,7 @@ export function RunDialog({ runId, onOpenChange }: {
 
             <div className="grid grid-cols-2 gap-2 max-[700px]:grid-cols-1">
               <div className="rounded-lg border bg-card">
-                <div className="border-b px-3 py-2">
+                <div className="border-b px-4 py-2.5">
                   <h3 className={HEAD}>Match</h3>
                 </div>
                 <div className="p-3">
@@ -53,13 +53,13 @@ export function RunDialog({ runId, onOpenChange }: {
                       ['Age', data.run.age],
                     ]} />
                   ) : (
-                    <div className="text-[10.5px] text-muted-foreground">Loading…</div>
+                    <div className="text-[13px] text-muted-foreground">Loading…</div>
                   )}
                 </div>
               </div>
 
               <div className="rounded-lg border bg-card">
-                <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
+                <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
                   <h3 className={HEAD}>Guardrails</h3>
                   <Button
                     variant="outline"
@@ -75,24 +75,24 @@ export function RunDialog({ runId, onOpenChange }: {
                       {data.guardrails.map((guardrail) => (
                         <div
                           key={guardrail.name}
-                          className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0"
+                          className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0"
                         >
                           <span>{guardrail.name}</span>
                           <Badge variant={guardrail.result === 'Pass' ? 'success' : 'danger'}>
                             {guardrail.result}
                           </Badge>
-                          <span className="text-[9px] tabular-nums text-muted-foreground">{guardrail.meta}</span>
+                          <span className="text-[12px] tabular-nums text-muted-foreground">{guardrail.meta}</span>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="text-[10.5px] text-muted-foreground">Loading…</div>
+                    <div className="text-[13px] text-muted-foreground">Loading…</div>
                   )}
                 </div>
               </div>
 
               <div className="rounded-lg border bg-card">
-                <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
+                <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
                   <h3 className={HEAD}>LangGraph trace</h3>
                   <Button
                     variant="outline"
@@ -106,32 +106,32 @@ export function RunDialog({ runId, onOpenChange }: {
                   {data ? (
                     <div className="grid gap-[5px]">
                       {data.trace.map((node, index) => (
-                        <div key={node.name} className="flex items-start gap-1.5 text-[10px]">
-                          <span className="flex size-[15px] shrink-0 items-center justify-center rounded-full bg-accent text-[8px] font-bold text-accent-foreground">
+                        <div key={node.name} className="flex items-start gap-1.5 text-[12.5px]">
+                          <span className="flex size-[15px] shrink-0 items-center justify-center rounded-full bg-accent text-[12px] font-bold text-accent-foreground">
                             {index + 1}
                           </span>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[10.5px] font-semibold">{node.name}</div>
-                            <div className="text-[9.5px] text-muted-foreground">{node.meta}</div>
+                            <div className="text-[13px] font-semibold">{node.name}</div>
+                            <div className="text-[12px] text-muted-foreground">{node.meta}</div>
                           </div>
-                          <div className="text-[9.5px] tabular-nums text-muted-foreground">{node.ms} ms</div>
+                          <div className="text-[12px] tabular-nums text-muted-foreground">{node.ms} ms</div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="text-[10.5px] text-muted-foreground">Loading…</div>
+                    <div className="text-[13px] text-muted-foreground">Loading…</div>
                   )}
                 </div>
               </div>
 
               <div className="rounded-lg border bg-card">
-                <div className="border-b px-3 py-2">
+                <div className="border-b px-4 py-2.5">
                   <h3 className={HEAD}>Evidence sources</h3>
                 </div>
                 <div className="p-3">
                   {data ? (
                     <div className="grid">
-                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0">
+                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0">
                         <span>Invoice PDF</span>
                         <Button
                           variant="outline"
@@ -141,7 +141,7 @@ export function RunDialog({ runId, onOpenChange }: {
                           S3
                         </Button>
                       </div>
-                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0">
+                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0">
                         <span>Pinecone chunks</span>
                         <Button
                           variant="outline"
@@ -151,7 +151,7 @@ export function RunDialog({ runId, onOpenChange }: {
                           Vectors
                         </Button>
                       </div>
-                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0">
+                      <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0">
                         <span>Checkpoint</span>
                         <Button
                           variant="outline"
@@ -163,7 +163,7 @@ export function RunDialog({ runId, onOpenChange }: {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-[10.5px] text-muted-foreground">Loading…</div>
+                    <div className="text-[13px] text-muted-foreground">Loading…</div>
                   )}
                 </div>
               </div>

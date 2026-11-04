@@ -25,7 +25,7 @@ import { DocumentDialog } from './DocumentDialog'
 import { OrphansTab } from './OrphansTab'
 import { UploadDropzone } from './UploadDropzone'
 
-const HEAD = 'text-[9px] uppercase tracking-[0.04em] text-muted-foreground'
+const HEAD = 'text-[12px] uppercase tracking-[0.05em] text-muted-foreground'
 const STAGES = ['Uploading', 'IDP extraction', 'Indexing'] as const
 const ACTIVE_STATUSES = new Set<string>(STAGES)
 
@@ -38,7 +38,7 @@ function StageDots({ status }: { status: Document['status'] }) {
           key={stage}
           className={cn(
             'size-[5px] rounded-full',
-            index < currentIndex ? 'bg-emerald-500' : index === currentIndex ? 'bg-sky-500' : 'bg-border',
+            index < currentIndex ? 'bg-success' : index === currentIndex ? 'bg-primary' : 'bg-border',
           )}
         />
       ))}
@@ -139,11 +139,11 @@ export default function DocumentsPage() {
         <TabsList>
           <TabsTrigger value="repo">
             Repository
-            <span className="rounded bg-background/70 px-1 text-[9.5px] tabular-nums">{repoDocs.length}</span>
+            <span className="rounded bg-background/70 px-1 text-[12px] tabular-nums">{repoDocs.length}</span>
           </TabsTrigger>
           <TabsTrigger value="orphans">
             Orphans
-            <span className="rounded bg-background/70 px-1 text-[9.5px] tabular-nums">{orphanDocs.length}</span>
+            <span className="rounded bg-background/70 px-1 text-[12px] tabular-nums">{orphanDocs.length}</span>
           </TabsTrigger>
         </TabsList>
 
@@ -157,8 +157,8 @@ export default function DocumentsPage() {
             />
 
             <div className="rounded-lg border bg-card">
-              <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
-                <h3 className="text-[12.5px] font-semibold">Processing</h3>
+              <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
+                <h3 className="text-[15px] font-semibold">Processing</h3>
                 <Badge variant={activeDocs.length ? 'info' : 'neutral'}>{activeDocs.length} active</Badge>
               </div>
               <div className="p-3">
@@ -169,7 +169,7 @@ export default function DocumentsPage() {
                     {activeDocs.map((doc) => (
                       <div
                         key={doc.id}
-                        className="flex items-center gap-[7px] border-b pb-[5px] text-[10.5px] last:border-0 last:pb-0"
+                        className="flex items-center gap-[7px] border-b pb-[5px] text-[13px] last:border-0 last:pb-0"
                       >
                         <span className="min-w-0 flex-1 truncate">{doc.file}</span>
                         <StageDots status={doc.status} />
@@ -183,9 +183,9 @@ export default function DocumentsPage() {
           </div>
 
           <div className="overflow-hidden rounded-lg border bg-card">
-            <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
+            <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
               <div className="flex items-center gap-1.5">
-                <h3 className="text-[12.5px] font-semibold">Repository</h3>
+                <h3 className="text-[15px] font-semibold">Repository</h3>
                 <Badge variant="neutral">{filteredDocs.length}</Badge>
               </div>
               <Input
@@ -193,11 +193,11 @@ export default function DocumentsPage() {
                 placeholder="Filter documents"
                 value={searchParams.get('q') ?? ''}
                 onChange={(event) => updateParams({ q: event.target.value || null })}
-                className="h-7 w-[180px] text-[11px]"
+                className="h-9 w-[180px] text-[13px]"
               />
             </div>
 
-            <Table className="text-[11px]">
+            <Table className="text-[13px]">
               <TableHeader>
                 <TableRow>
                   <TableHead className={HEAD}>File</TableHead>
@@ -222,7 +222,7 @@ export default function DocumentsPage() {
                   <TableRow key={doc.id}>
                     <TableCell>
                       <div className="font-semibold">{doc.file}</div>
-                      <div className="mt-px text-[10px] text-muted-foreground">
+                      <div className="mt-px text-[12.5px] text-muted-foreground">
                         {doc.id}{doc.matchId ? ` · ${doc.matchId}` : ''}
                       </div>
                     </TableCell>

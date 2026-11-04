@@ -19,19 +19,19 @@ export function Topbar() {
   const unread = notifications?.filter((n) => n.unread).length ?? 0
 
   return (
-    <header className="sticky top-0 z-20 flex h-12 items-center gap-2 border-b bg-card/95 px-3.5 backdrop-blur">
+    <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-card/90 px-4 backdrop-blur-md max-[640px]:px-3">
       <Button variant="ghost" size="iconSm" className="min-[1024px]:hidden" aria-label="Open navigation" onClick={() => setSidebarOpen(true)}>
         <Menu />
       </Button>
-      <div className="flex min-w-0 items-center gap-2">
-        <h2 className="truncate text-sm font-semibold">{titleForPath(location.pathname)}</h2>
-        <Badge variant="info" className="hidden min-[900px]:inline-flex">Demo data</Badge>
+      <div className="flex min-w-0 items-center gap-2.5">
+        <h2 className="truncate text-[15px] font-bold tracking-[-0.01em]">{titleForPath(location.pathname)}</h2>
+        <Badge variant="info" className="hidden min-[1280px]:inline-flex">Demo data</Badge>
       </div>
       <div className="flex-1" />
       <div className="hidden min-[900px]:block"><GlobalSearch /></div>
       <Button
-        className="bg-gradient-to-b from-[#5850ec] to-primary text-white hover:bg-primary/90"
         size="xs"
+        className="shadow-sm shadow-primary/20"
         aria-label="Assistant"
         onClick={toggleAssistant}
       >
@@ -41,7 +41,7 @@ export function Topbar() {
         <Link to="/notifications">
           <Bell />
           {unread > 0 && (
-            <span className="absolute -right-0.5 -top-0.5 flex size-3.5 items-center justify-center rounded-full border-2 border-card bg-danger text-[8.5px] font-bold text-white">
+            <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full border-2 border-card bg-danger text-[11px] font-bold leading-none text-white">
               {unread}
             </span>
           )}
@@ -59,7 +59,7 @@ export function Topbar() {
           navigate('/login')
         }}
       >
-        <LogOut /> <span className="hidden min-[640px]:inline">Log out</span>
+        <LogOut /> <span className="hidden min-[1280px]:inline">Log out</span>
       </Button>
     </header>
   )

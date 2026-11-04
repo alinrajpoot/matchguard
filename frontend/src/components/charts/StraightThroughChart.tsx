@@ -20,8 +20,8 @@ export function StraightThroughChart({ values }: { values: number[] }) {
     <>
       <div className="mb-[7px] flex items-start justify-between gap-2">
         <div>
-          <h3 className="text-[12.5px] font-semibold">Straight-through rate</h3>
-          <div className="mt-px text-[10px] text-muted-foreground">Auto-approved share vs 85% target</div>
+          <h3 className="text-[15px] font-semibold">Straight-through rate</h3>
+          <div className="mt-px text-[12.5px] text-muted-foreground">Auto-approved share vs 85% target</div>
         </div>
         <Badge variant="success">{last.toFixed(1)}%</Badge>
       </div>
@@ -29,11 +29,11 @@ export function StraightThroughChart({ values }: { values: number[] }) {
         {[84, 86, 88].map((v) => (
           <g key={v}>
             <line x1={PAD} x2={W - PAD} y1={y(v)} y2={y(v)} stroke="#eef0f3" />
-            <text x={PAD} y={y(v) - 3} fontSize={8} className="fill-muted-foreground">{v}%</text>
+            <text x={PAD} y={y(v) - 5} fontSize={15} className="fill-muted-foreground">{v}%</text>
           </g>
         ))}
         <line x1={PAD} x2={W - PAD} y1={y(TARGET)} y2={y(TARGET)} stroke="#98a2b3" strokeDasharray="3 4" />
-        <text x={W - PAD - 2} y={y(TARGET) - 4} textAnchor="end" fontSize={8} className="fill-muted-foreground">
+        <text x={W - PAD - 2} y={y(TARGET) - 6} textAnchor="end" fontSize={15} className="fill-muted-foreground">
           target 85%
         </text>
         <path d={area} fill="var(--chart-acc)" opacity={0.08} />
@@ -45,22 +45,22 @@ export function StraightThroughChart({ values }: { values: number[] }) {
           </circle>
         ))}
       </svg>
-      <details className="mt-[7px] text-[10px] text-muted-foreground">
+      <details className="mt-[7px] text-[12.5px] text-muted-foreground">
         <summary className="cursor-pointer select-none">View data table</summary>
         <table className="mt-1 w-full border-collapse">
           <thead>
             <tr>
-              <th className="border-b px-1 py-0.5 text-left text-[9.5px]">Day</th>
-              <th className="border-b px-1 py-0.5 text-right text-[9.5px]">Rate</th>
-              <th className="border-b px-1 py-0.5 text-right text-[9.5px]">Target</th>
+              <th className="border-b px-1 py-0.5 text-left text-[12px]">Day</th>
+              <th className="border-b px-1 py-0.5 text-right text-[12px]">Rate</th>
+              <th className="border-b px-1 py-0.5 text-right text-[12px]">Target</th>
             </tr>
           </thead>
           <tbody>
             {values.map((v, i) => (
               <tr key={i}>
-                <td className="border-b px-1 py-0.5 text-left text-[9.5px]">{`Mar ${i + 1}`}</td>
-                <td className="border-b px-1 py-0.5 text-right text-[9.5px]">{v.toFixed(1)}%</td>
-                <td className="border-b px-1 py-0.5 text-right text-[9.5px]">85.0%</td>
+                <td className="border-b px-1 py-0.5 text-left text-[12px]">{`Mar ${i + 1}`}</td>
+                <td className="border-b px-1 py-0.5 text-right text-[12px]">{v.toFixed(1)}%</td>
+                <td className="border-b px-1 py-0.5 text-right text-[12px]">85.0%</td>
               </tr>
             ))}
           </tbody>

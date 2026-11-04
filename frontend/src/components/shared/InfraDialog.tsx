@@ -25,21 +25,21 @@ export function InfraDialog() {
         {entry && (
           <>
             <DialogHeader>
-              <DialogTitle className="flex items-center gap-2 text-[13px]">
+              <DialogTitle className="flex items-center gap-2 text-[14px]">
                 <Icon className="size-4" />
                 {entry.name}
                 <Badge variant="success">Healthy</Badge>
               </DialogTitle>
               <DialogDescription className="sr-only">Infrastructure evidence</DialogDescription>
             </DialogHeader>
-            <dl className="grid grid-cols-[86px_1fr] gap-x-2 gap-y-1 text-[10.5px]">
+            <dl className="grid grid-cols-[86px_1fr] gap-x-2 gap-y-1 text-[13px]">
               <dt className="text-muted-foreground">Resource</dt><dd className="mono break-all">{resource}</dd>
               <dt className="text-muted-foreground">Region</dt><dd>{entry.region}</dd>
               <dt className="text-muted-foreground">Request ID</dt><dd className="mono">{entry.req}</dd>
               <dt className="text-muted-foreground">Observed</dt><dd className="mono">{nowUTC()} UTC</dd>
               <dt className="text-muted-foreground">Purpose</dt><dd>{entry.note}</dd>
             </dl>
-            <p className="text-[10.5px] text-muted-foreground">
+            <p className="text-[13px] text-muted-foreground">
               This is demo evidence from a fictional environment. The link opens the real service console for illustration.
             </p>
             <DialogFooter>

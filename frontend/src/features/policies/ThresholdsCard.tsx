@@ -5,8 +5,8 @@ import { Slider } from '@/components/ui/slider'
 import type { PolicyFormValues } from '@/schemas/forms'
 
 const CARD = 'rounded-lg border bg-card'
-const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-3 py-2'
-const CARD_TITLE = 'text-[12.5px] font-semibold'
+const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-4 py-2.5'
+const CARD_TITLE = 'text-[15px] font-semibold'
 
 const NUMBER_FIELDS = [
   { name: 'quantityTolerance', label: 'Quantity tolerance', step: 1 },
@@ -23,7 +23,7 @@ export function ThresholdsCard({ form }: { form: UseFormReturn<PolicyFormValues>
     <div className={CARD}>
       <div className={CARD_HEAD}>
         <h3 className={CARD_TITLE}>Matching thresholds</h3>
-        <span className="text-[9.5px] text-muted-foreground">policy engine inputs</span>
+        <span className="hidden text-[12px] text-muted-foreground min-[640px]:inline">policy engine inputs</span>
       </div>
       <div className="p-3">
         <Controller
@@ -31,13 +31,13 @@ export function ThresholdsCard({ form }: { form: UseFormReturn<PolicyFormValues>
           name="priceTolerance"
           render={({ field }) => (
             <div className="border-b py-[7px] last:border-0">
-              <div className="flex items-center justify-between gap-2 text-[11.5px] font-medium">
+              <div className="flex items-center justify-between gap-2 text-[13px] font-medium">
                 <span>Price variance tolerance</span>
                 <b className="tabular-nums text-accent-foreground">
                   {Number(field.value).toFixed(1)}%
                 </b>
               </div>
-              <div className="mt-0.5 text-[9.5px] text-muted-foreground">
+              <div className="mt-0.5 text-[12px] text-muted-foreground">
                 Escalate when any invoice line differs from the PO by more than this.
               </div>
               <Slider
@@ -53,12 +53,12 @@ export function ThresholdsCard({ form }: { form: UseFormReturn<PolicyFormValues>
           )}
         />
 
-        <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-[9px]">
+        <div className="mt-1 grid grid-cols-1 gap-x-3 gap-y-2.5 min-[520px]:grid-cols-2">
           {NUMBER_FIELDS.map((field) => (
             <div key={field.name}>
               <Label
                 htmlFor={`threshold-${field.name}`}
-                className="mb-[3px] block text-[9.5px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
+                className="mb-[3px] block text-[12px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
               >
                 {field.label}
               </Label>
@@ -66,7 +66,7 @@ export function ThresholdsCard({ form }: { form: UseFormReturn<PolicyFormValues>
                 id={`threshold-${field.name}`}
                 type="number"
                 step={field.step}
-                className="h-7 text-[11px]"
+                className="h-9 text-[13px]"
                 {...form.register(field.name, { valueAsNumber: true })}
               />
             </div>

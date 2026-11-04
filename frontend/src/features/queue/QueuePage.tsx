@@ -15,7 +15,7 @@ import { usePolicy, useQueue } from '@/hooks/queries'
 import { money } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
-const HEAD = 'text-[9px] uppercase tracking-[0.04em] text-muted-foreground'
+const HEAD = 'text-[12px] uppercase tracking-[0.05em] text-muted-foreground'
 
 const AGING = [
   ['Under 1 hour', 2],
@@ -36,8 +36,8 @@ const FAILURE_MIX = [
 function SideCard({ title, action, children }: { title: string; action?: ReactNode; children: ReactNode }) {
   return (
     <div className="rounded-lg border bg-card">
-      <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
-        <h3 className="text-[12.5px] font-semibold">{title}</h3>
+      <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
+        <h3 className="text-[15px] font-semibold">{title}</h3>
         {action}
       </div>
       <div className="p-3">{children}</div>
@@ -47,7 +47,7 @@ function SideCard({ title, action, children }: { title: string; action?: ReactNo
 
 function MiniRow({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0">
+    <div className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0">
       <span>{label}</span>
       <b className="tabular-nums">{value}</b>
     </div>
@@ -79,17 +79,16 @@ export default function QueuePage() {
         chips={['postgres', 'glassflow', 'langgraph']}
       />
 
-      <div className="grid grid-cols-[minmax(0,1fr)_310px] items-start gap-[9px] max-[900px]:grid-cols-1">
+      <div className="grid grid-cols-1 items-start gap-2.5 min-[1440px]:grid-cols-[minmax(0,1fr)_300px]">
         <div className="overflow-hidden rounded-lg border bg-card">
-          <Table className="text-[11px]">
+          <Table className="text-[13px]">
             <TableHeader>
               <TableRow>
                 <TableHead className={HEAD}>Match</TableHead>
-                <TableHead className={HEAD}>Invoice</TableHead>
                 <TableHead className={HEAD}>Vendor</TableHead>
                 <TableHead className={`${HEAD} text-right`}>Amount</TableHead>
                 <TableHead className={`${HEAD} text-right`}>Variance</TableHead>
-                <TableHead className={HEAD}>Risk</TableHead>
+                <TableHead className={`${HEAD} max-[1100px]:hidden`}>Risk</TableHead>
                 <TableHead className={HEAD}>SLA</TableHead>
                 <TableHead className={`${HEAD} text-right`} />
               </TableRow>
@@ -97,28 +96,32 @@ export default function QueuePage() {
             <TableBody>
               {queue.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={8} className="p-0">
+                  <TableCell colSpan={7} className="p-0">
                     <EmptyState title="Queue is clear. Escalated matches will appear here." />
                   </TableCell>
                 </TableRow>
               )}
               {queue.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell className="font-semibold">{item.id}</TableCell>
-                  <TableCell>{item.invoice}</TableCell>
+                  <TableCell>
+                    <div className="font-semibold">{item.id}</div>
+                    <div className="mt-px text-[12.5px] text-muted-foreground">{item.invoice}</div>
+                  </TableCell>
                   <TableCell>{item.vendor}</TableCell>
                   <TableCell className="text-right tabular-nums">{money(item.amount)}</TableCell>
                   <TableCell className="text-right font-semibold tabular-nums text-warning">
                     {item.variance.toFixed(1)}%
                   </TableCell>
-                  <TableCell><RiskBadge risk={item.risk} /></TableCell>
+                  <TableCell className="max-[1100px]:hidden"><RiskBadge risk={item.risk} /></TableCell>
                   <TableCell className={cn('tabular-nums', parseInt(item.sla, 10) < 1 && 'font-semibold text-danger')}>
                     {item.sla} left
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-end">
                       <Button size="xs" asChild>
-                        <Link to={`/review/${item.id}`}><UserCheck />Review</Link>
+                        <Link to={`/review/${item.id}`} aria-label={`Review ${item.id}`}>
+                          <UserCheck /><span className="hidden min-[1200px]:inline">Review</span>
+                        </Link>
                       </Button>
                     </div>
                   </TableCell>

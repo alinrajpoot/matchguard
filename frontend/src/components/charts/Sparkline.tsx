@@ -10,11 +10,21 @@ export function Sparkline({ values, color }: { values: number[]; color: string }
 
   return (
     <svg
-      className="absolute bottom-[7px] right-[9px] h-6 w-[70px] opacity-85"
+      className="mt-auto h-7 w-full pt-2"
       viewBox={`0 0 ${w} ${h}`}
+      preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <polyline points={points} fill="none" stroke={color} strokeWidth={1.6} />
+      <polygon points={`0,${h} ${points} ${w},${h}`} fill={color} opacity={0.08} />
+      <polyline
+        points={points}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+      />
     </svg>
   )
 }

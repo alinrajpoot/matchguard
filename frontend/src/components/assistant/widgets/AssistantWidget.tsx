@@ -50,13 +50,13 @@ function Frame({ kind, children }: { kind: string; children: ReactNode }) {
   const meta = WIDGET_META[kind] ?? { tool: kind, ms: 0, service: 'Mock service' }
   return (
     <div className="mt-1.5 overflow-hidden rounded-[7px] border bg-card">
-      <div className="flex items-center gap-1.5 border-b bg-[#fafbfc] px-2 py-1.5 font-mono text-[9px] text-muted-foreground">
-        <Wrench className="size-3" />
+      <div className="flex items-center gap-2 border-b bg-muted/40 px-3 py-2 font-mono text-[12px] text-muted-foreground">
+        <Wrench className="size-3.5" />
         <span>{meta.tool}</span>
-        <span className="ml-auto font-sans text-[8.5px] text-muted-foreground/70">{meta.ms} ms</span>
-        <span className="font-sans text-[8.5px] text-muted-foreground/70">{meta.service}</span>
+        <span className="ml-auto text-[12px] text-muted-foreground/70">{meta.ms} ms</span>
+        <span className="text-[12px] text-muted-foreground/70">{meta.service}</span>
       </div>
-      <div className="px-[9px] py-2 text-[10.5px] leading-[1.45]">{children}</div>
+      <div className="px-3 py-2.5 text-[13px] leading-[1.5]">{children}</div>
     </div>
   )
 }
@@ -83,11 +83,11 @@ function QueueSummaryWidget({ widget }: { widget: QueueWidget }) {
         <div key={item.id} className="flex items-center justify-between gap-2 border-b py-1.5 last:border-0">
           <div className="min-w-0">
             <b>{item.id}</b>
-            <div className="text-[9px] text-muted-foreground">{item.vendor}</div>
+            <div className="text-[12px] text-muted-foreground">{item.vendor}</div>
           </div>
           <div className="text-right">
             <b className="tabular-nums">{item.variance.toFixed(1)}%</b>
-            <div className="text-[9px] text-muted-foreground">{item.sla} left</div>
+            <div className="text-[12px] text-muted-foreground">{item.sla} left</div>
           </div>
         </div>
       ))}
@@ -107,10 +107,10 @@ function DashboardStatsWidget({ widget }: { widget: DashboardWidget }) {
       <div className="grid grid-cols-2 gap-[5px]">
         {widget.tiles.map((tile) => (
           <div key={tile.k} className="rounded-[5px] border px-1.5 py-1">
-            <div className="text-[8.5px] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
+            <div className="text-[12px] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
               {tile.k}
             </div>
-            <b className="mt-px block text-[13px] tracking-[-0.01em]">{tile.v}</b>
+            <b className="mt-px block text-[14px] tracking-[-0.01em]">{tile.v}</b>
           </div>
         ))}
       </div>
@@ -126,7 +126,7 @@ function VendorsWidgetView({ widget }: { widget: VendorsWidget }) {
         <div key={vendor.name} className="flex items-center justify-between gap-2 border-b py-1.5 last:border-0">
           <div className="min-w-0">
             <b>{vendor.name}</b>
-            <div className="text-[9px] text-muted-foreground">
+            <div className="text-[12px] text-muted-foreground">
               {vendor.matches} matches · {money(vendor.exposure)} exposure
             </div>
           </div>
@@ -187,8 +187,8 @@ function PolicyChangeWidget({ widget }: { widget: PolicyChange }) {
   return (
     <Frame kind="policy_change">
       <p className={P}>I can make that change, but it needs your approval first.</p>
-      <div className="my-1.5 rounded-[5px] border border-[#fedf89] bg-[#fffcf5] px-2 py-1.5">
-        <div className="text-[8.5px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+      <div className="my-1.5 rounded-[5px] border border-warning/30 bg-warning-bg/60 px-2 py-1.5">
+        <div className="text-[12px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
           Proposed change
         </div>
         <div className="mt-1 flex justify-between gap-2">
@@ -199,7 +199,7 @@ function PolicyChangeWidget({ widget }: { widget: PolicyChange }) {
           <span>Projected HITL</span>
           <b>177 → {widget.projected} ({projectedDelta})</b>
         </div>
-        <div className="mt-[3px] text-[9px] text-muted-foreground">
+        <div className="mt-[3px] text-[12px] text-muted-foreground">
           Amount threshold and other guardrails unchanged.
         </div>
       </div>
@@ -220,8 +220,8 @@ function ReportWidgetView({ widget }: { widget: ReportWidget }) {
           <FileSpreadsheet className="size-3.5" />
         </span>
         <div className="min-w-0 flex-1">
-          <div className="text-[10.5px] font-semibold">{widget.filename}</div>
-          <div className="text-[9px] text-muted-foreground">{widget.rows} matches · {widget.size}</div>
+          <div className="text-[13px] font-semibold">{widget.filename}</div>
+          <div className="text-[12px] text-muted-foreground">{widget.rows} matches · {widget.size}</div>
         </div>
         <Button
           size="xs"
@@ -247,16 +247,16 @@ function SearchDocumentsWidget({ widget }: { widget: SearchWidget }) {
           key={result.docId}
           type="button"
           onClick={() => go(`/documents?doc=${result.docId}`)}
-          className="block w-full border-b py-1.5 text-left last:border-0 hover:bg-[#fafbfc]"
+          className="block w-full border-b py-1.5 text-left last:border-0 hover:bg-muted/60"
         >
-          <div className="flex items-center justify-between gap-1.5 text-[10.5px] font-semibold">
+          <div className="flex items-center justify-between gap-1.5 text-[13px] font-semibold">
             <span>{result.file}</span>
             <Badge variant="neutral">{result.type}</Badge>
           </div>
-          <div className="mt-0.5 text-[9.5px] text-muted-foreground">
+          <div className="mt-0.5 text-[12px] text-muted-foreground">
             {result.meta} · {result.chunk}
           </div>
-          <div className="mt-0.5 text-[8.5px] text-muted-foreground/70">{result.s3}</div>
+          <div className="mt-0.5 text-[12px] text-muted-foreground/70">{result.s3}</div>
         </button>
       ))}
     </Frame>
@@ -268,7 +268,7 @@ function DocumentWidgetView({ widget }: { widget: DocumentWidgetData }) {
   const doc = widget.doc
   return (
     <Frame kind="document">
-      <div className="mb-[7px] rounded-md border bg-white p-2 font-serif text-[9px] text-[#333]">
+      <div className="mb-[7px] rounded-md border bg-white p-2 font-serif text-[12px] text-[#333]">
         <div className="flex justify-between border-b border-[#ddd] py-0.5">
           <b>{doc.vendor}</b>
           <span>{doc.type === 'INV' ? 'INVOICE' : doc.type}</span>
@@ -321,7 +321,7 @@ function InvoiceLinksWidgetView({ widget }: { widget: InvoiceLinksWidget }) {
       {widget.missing ? (
         <>
           <div className="mt-1.5"><Badge variant="warning">Missing {widget.missing}</Badge></div>
-          <div className="mt-1 text-[9.5px] text-muted-foreground">
+          <div className="mt-1 text-[12px] text-muted-foreground">
             Upload the missing document before running a match.
           </div>
           <Button className="mt-1.5" size="xs" variant="outline" onClick={() => go('/documents')}>
@@ -356,14 +356,14 @@ function MatchTraceWidgetView({ widget }: { widget: TraceWidget }) {
       <ol className="mb-1.5 mt-1 space-y-1.5">
         {widget.trace.map((node, index) => (
           <li key={node.name} className="flex gap-1.5">
-            <span className="mt-0.5 flex size-4 flex-none items-center justify-center rounded-full bg-accent text-[8.5px] font-bold text-accent-foreground">
+            <span className="mt-0.5 flex size-4 flex-none items-center justify-center rounded-full bg-accent text-[12px] font-bold text-accent-foreground">
               {index + 1}
             </span>
             <div className="min-w-0 flex-1">
               <b>{node.name}</b>
               <span className="text-muted-foreground"> · {node.meta}</span>
             </div>
-            <span className="text-[9px] text-muted-foreground/70">{node.ms} ms</span>
+            <span className="text-[12px] text-muted-foreground/70">{node.ms} ms</span>
           </li>
         ))}
       </ol>
@@ -380,7 +380,7 @@ function GuardrailResultsWidget({ widget }: { widget: GuardrailWidget }) {
         <div key={row.name} className="flex items-center justify-between gap-2 border-b py-1.5 last:border-0">
           <div>
             <b>{row.name}</b>
-            <div className="text-[9px] text-muted-foreground">{row.observed} vs {row.threshold}</div>
+            <div className="text-[12px] text-muted-foreground">{row.observed} vs {row.threshold}</div>
           </div>
           <Badge variant={row.result === 'pass' ? 'success' : 'danger'}>
             {row.result === 'pass' ? 'Pass' : 'Fail'}
@@ -402,7 +402,7 @@ function AuditEventsWidget({ widget }: { widget: AuditWidget }) {
             <span className="mt-1 size-1.5 flex-none rounded-full bg-primary" />
             <div>
               <div>{event.action}</div>
-              <div className="text-[8.5px] text-muted-foreground">{event.ts} · {event.actor}</div>
+              <div className="text-[12px] text-muted-foreground">{event.ts} · {event.actor}</div>
             </div>
           </div>
         ))}
@@ -420,10 +420,10 @@ function PipelineHealthWidget({ widget }: { widget: HealthWidget }) {
     <Frame kind="pipeline_health">
       <p className={P}>All demo services are healthy.</p>
       {widget.services.map((service) => (
-        <div key={service.name} className="flex items-center gap-[7px] border-b py-1.5 text-[10px] last:border-0">
-          <span className="size-1.5 flex-none rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
+        <div key={service.name} className="flex items-center gap-[7px] border-b py-1.5 text-[12.5px] last:border-0">
+          <span className="size-1.5 flex-none rounded-full bg-success ring-2 ring-success/15" />
           <span className="min-w-0 flex-1 truncate font-semibold">{service.name}</span>
-          <span className="whitespace-nowrap text-[8.5px] text-muted-foreground">{service.meta}</span>
+          <span className="whitespace-nowrap text-[12px] text-muted-foreground">{service.meta}</span>
           <Button
             variant="ghost"
             size="iconSm"

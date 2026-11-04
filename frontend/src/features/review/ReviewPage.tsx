@@ -20,8 +20,8 @@ import { reviewDecisionSchema, type ReviewDecisionValues } from '@/schemas/forms
 import { LineComparison } from './LineComparison'
 
 const CARD = 'rounded-lg border bg-card'
-const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-3 py-2'
-const CARD_TITLE = 'text-[12.5px] font-semibold'
+const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-4 py-2.5'
+const CARD_TITLE = 'text-[15px] font-semibold'
 
 export default function ReviewPage() {
   const { matchId = '' } = useParams()
@@ -85,11 +85,11 @@ export default function ReviewPage() {
         </>}
       />
 
-      <div className="mb-[9px] flex flex-wrap items-start gap-2 rounded-lg border border-[#fedf89] bg-[#fffcf5] px-[11px] py-[9px] text-[11.5px] text-[#93370d]">
+      <div className="mb-[9px] flex flex-wrap items-start gap-2 rounded-lg border border-warning/30 bg-warning-bg/60 px-3.5 py-3 text-[13px] text-warning">
         <ShieldAlert className="mt-px size-4 shrink-0" />
         <div className="min-w-0 flex-1">
           <b>Awaiting human review</b>
-          <div className="mt-px text-[11px]">
+          <div className="mt-px text-[13px]">
             This match was escalated because the invoice variance of {data.variance.toFixed(1)}% exceeds
             the policy threshold of {data.threshold.toFixed(1)}%. Nothing is paid until you decide.
           </div>
@@ -99,12 +99,12 @@ export default function ReviewPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-[minmax(0,1fr)_310px] items-start gap-[9px] max-[900px]:grid-cols-1">
+      <div className="grid grid-cols-1 items-start gap-2.5 min-[1200px]:grid-cols-[minmax(0,1fr)_310px]">
         <div className="min-w-0">
           <div className={`${CARD} mb-[9px]`}>
             <div className={CARD_HEAD}>
               <h3 className={CARD_TITLE}>Document chain</h3>
-              <span className="text-[9.5px] text-muted-foreground">Three-way link · Invoice ↔ PO ↔ GRN</span>
+              <span className="text-[12px] text-muted-foreground">Three-way link · Invoice ↔ PO ↔ GRN</span>
             </div>
             <div className="p-3">
               <DocumentSpine invoice={data.invoice} po={data.po} grn={data.grn} />
@@ -136,17 +136,17 @@ export default function ReviewPage() {
           <div className={CARD}>
             <div className={CARD_HEAD}>
               <h3 className={CARD_TITLE}>Line comparison</h3>
-              <span className="text-[9.5px] text-muted-foreground">PO · GRN · Invoice</span>
+              <span className="text-[12px] text-muted-foreground">PO · GRN · Invoice</span>
             </div>
             <LineComparison invoice={data.invoice} lines={data.lines} />
           </div>
 
           <details className={`${CARD} mt-[9px]`}>
-            <summary className="cursor-pointer px-3 py-2 text-[11.5px] font-semibold text-muted-foreground">
+            <summary className="cursor-pointer px-3 py-2 text-[13px] font-semibold text-muted-foreground">
               Advanced · decision payload
             </summary>
             <div className="px-3 pb-3">
-              <pre className="mono overflow-auto rounded-md bg-[#0f172a] p-2.5 text-[10px] leading-[1.5] text-[#e2e8f0]">
+              <pre className="mono overflow-auto rounded-md bg-[#01173e] p-2.5 text-[12.5px] leading-[1.5] text-[#dce7f7]">
                 {JSON.stringify(data.payload, null, 2)}
               </pre>
               <div className="mt-1.5">
@@ -166,7 +166,7 @@ export default function ReviewPage() {
               <h3 className={CARD_TITLE}>System recommendation</h3>
               <Badge variant="warning">HOLD</Badge>
             </div>
-            <div className="p-3 text-[11px] text-muted-foreground">{data.recommendation}</div>
+            <div className="p-3 text-[13px] text-muted-foreground">{data.recommendation}</div>
           </div>
 
           <div className={CARD}>
@@ -179,11 +179,11 @@ export default function ReviewPage() {
                 {data.guardrails.map((guardrail) => (
                   <div
                     key={guardrail.name}
-                    className="flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0"
+                    className="flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0"
                   >
                     <div>
                       <div>{guardrail.name}</div>
-                      <div className="mt-px text-[10px] text-muted-foreground">
+                      <div className="mt-px text-[12.5px] text-muted-foreground">
                         {guardrail.observed} vs {guardrail.threshold}
                       </div>
                     </div>
@@ -212,16 +212,16 @@ export default function ReviewPage() {
                         <Textarea
                           rows={3}
                           placeholder="Reason for decision (required to approve)"
-                          className="text-[11px]"
+                          className="text-[13px]"
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[12.5px]" />
                     </FormItem>
                   )}
                 />
               </Form>
-              <p className="mt-1 text-[9.5px] text-muted-foreground">
+              <p className="mt-1 text-[12px] text-muted-foreground">
                 This decision is recorded in the audit log with your user ID and timestamp.
               </p>
             </div>
@@ -239,7 +239,7 @@ export default function ReviewPage() {
                 {data.audit.map((entry) => (
                   <div
                     key={`${entry.time}-${entry.text}`}
-                    className="flex gap-[7px] text-[10.5px] leading-[1.4]"
+                    className="flex gap-[7px] text-[13px] leading-[1.4]"
                   >
                     <span className="w-8 shrink-0 tabular-nums text-muted-foreground">{entry.time}</span>
                     <span>{entry.text}</span>

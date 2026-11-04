@@ -28,9 +28,9 @@ import { useAssistantStore } from '@/stores/assistant-store'
 import { useAuthStore } from '@/stores/auth-store'
 
 const CARD = 'rounded-lg border bg-card'
-const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-3 py-2'
-const CARD_TITLE = 'text-[12.5px] font-semibold'
-const MINI_ROW = 'flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0'
+const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-4 py-2.5'
+const CARD_TITLE = 'text-[15px] font-semibold'
+const MINI_ROW = 'flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0'
 
 const TIME_ZONES = ['Central Time (US)', 'Eastern Time (US)', 'Pacific Time (US)', 'UTC']
 
@@ -121,31 +121,31 @@ function SettingsView({ me }: { me: DemoUser }) {
             <div className="mb-[7px]">
               <Label
                 htmlFor="settings-name"
-                className="mb-[3px] block text-[9.5px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
+                className="mb-[3px] block text-[12px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
               >
                 Name
               </Label>
-              <Input id="settings-name" className="h-7 text-[11px]" {...form.register('name')} />
+              <Input id="settings-name" className="h-9 text-[13px]" {...form.register('name')} />
             </div>
             <div className="mb-[7px]">
               <Label
                 htmlFor="settings-email"
-                className="mb-[3px] block text-[9.5px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
+                className="mb-[3px] block text-[12px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
               >
                 Email
               </Label>
-              <Input id="settings-email" type="email" className="h-7 text-[11px]" {...form.register('email')} />
+              <Input id="settings-email" type="email" className="h-9 text-[13px]" {...form.register('email')} />
             </div>
             <div>
               <Label
                 htmlFor="settings-tz"
-                className="mb-[3px] block text-[9.5px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
+                className="mb-[3px] block text-[12px] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
               >
                 Time zone
               </Label>
               <select
                 id="settings-tz"
-                className="h-7 w-full rounded-md border border-input bg-transparent px-2 text-[11px] shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none"
+                className="h-9 w-full rounded-md border border-input bg-transparent px-2 text-[13px] shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none"
                 {...form.register('tz')}
               >
                 {TIME_ZONES.map((zone) => <option key={zone} value={zone}>{zone}</option>)}
@@ -170,11 +170,11 @@ function SettingsView({ me }: { me: DemoUser }) {
             {ALERT_PREFERENCES.map((preference) => (
               <div
                 key={preference.key}
-                className="flex items-center justify-between gap-[10px] border-b py-[7px] text-[11.5px] last:border-0"
+                className="flex items-center justify-between gap-[10px] border-b py-[7px] text-[13px] last:border-0"
               >
                 <div>
                   <div>{preference.title}</div>
-                  <div className="mt-px text-[9.5px] text-muted-foreground">{preference.sub}</div>
+                  <div className="mt-px text-[12px] text-muted-foreground">{preference.sub}</div>
                 </div>
                 <Switch
                   aria-label={preference.title}
@@ -235,7 +235,7 @@ function SettingsView({ me }: { me: DemoUser }) {
           <div className="px-3 py-2">
             <div className={MINI_ROW}>
               <span>Image</span>
-              <span className="mono text-[10px]">matchguard-api:1.4.2</span>
+              <span className="mono text-[12.5px]">matchguard-api:1.4.2</span>
             </div>
             <div className={MINI_ROW}>
               <span>Registry</span>
@@ -260,7 +260,7 @@ function SettingsView({ me }: { me: DemoUser }) {
           <div className="flex items-center justify-between gap-[10px] p-3">
             <div>
               <div className="font-semibold">Sign out of MatchGuard</div>
-              <div className="text-[10px] text-muted-foreground">Returns to the demo sign-in screen.</div>
+              <div className="text-[12.5px] text-muted-foreground">Returns to the demo sign-in screen.</div>
             </div>
             <Button variant="outline" size="xs" onClick={onSignOut}>
               <LogOut />Log out

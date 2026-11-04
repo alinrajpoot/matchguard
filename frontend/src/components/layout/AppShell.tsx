@@ -18,9 +18,9 @@ export function AppShell() {
   return (
     <div className="min-h-svh">
       <Sidebar />
-      <div className="min-[1024px]:pl-[216px]">
+      <div className="min-[1024px]:pl-[240px]">
         <Topbar />
-        <main className="mx-auto max-w-[1660px] px-5 pb-11 pt-4 max-[1200px]:px-4 max-[640px]:px-2.5">
+        <main className="mx-auto max-w-[1680px] px-6 pb-12 pt-6 max-[1200px]:px-5 max-[640px]:px-3 max-[640px]:pt-4">
           <Outlet />
         </main>
       </div>

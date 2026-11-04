@@ -6,10 +6,10 @@ export function InvoiceChain({ invoice }: { invoice: Invoice }) {
   return (
     <div className="px-3 py-2.5">
       <div className="mb-[7px] flex flex-wrap items-center justify-between gap-2">
-        <span className="text-[9px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+        <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
           Three-way link
         </span>
-        <span className="text-[10px] text-muted-foreground">
+        <span className="text-[12.5px] text-muted-foreground">
           linked by PO reference + vendor + amount
         </span>
       </div>

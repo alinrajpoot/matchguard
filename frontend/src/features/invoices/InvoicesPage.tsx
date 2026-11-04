@@ -24,7 +24,7 @@ import { cn } from '@/lib/utils'
 import type { Invoice } from '@/schemas/domain'
 import { InvoiceChain } from './InvoiceChain'
 
-const HEAD = 'text-[9px] uppercase tracking-[0.04em] text-muted-foreground'
+const HEAD = 'text-[12px] uppercase tracking-[0.05em] text-muted-foreground'
 
 const STATUS_TABS = [
   { value: 'all', label: 'All' },
@@ -138,17 +138,17 @@ export default function InvoicesPage() {
             type="button"
             onClick={() => updateParams({ status: card.key })}
             className={cn(
-              'rounded-md border bg-card px-2.5 py-2 text-left transition-colors hover:border-border',
-              status === card.key && 'border-[#c7d2fe] bg-[#f8f8ff] shadow-[inset_0_0_0_1px_#c7d2fe]',
+              'rounded-lg border bg-card px-3 py-2.5 text-left transition-colors hover:border-primary/30',
+              status === card.key && 'border-primary/50 bg-accent shadow-[inset_0_0_0_1px_var(--primary)]',
             )}
           >
-            <div className="text-[9.5px] font-semibold uppercase tracking-[0.055em] text-muted-foreground">
+            <div className="text-[12px] font-semibold uppercase tracking-[0.055em] text-muted-foreground">
               {card.label}
             </div>
-            <div className="mt-px text-[18px] font-semibold leading-tight tracking-[-0.02em]">
+            <div className="mt-1 text-[22px] font-bold leading-tight tracking-[-0.03em] tabular-nums">
               {counts[card.key]}
             </div>
-            <div className="mt-px text-[9.5px] text-muted-foreground">{card.sub}</div>
+            <div className="mt-px text-[12px] text-muted-foreground">{card.sub}</div>
           </button>
         ))}
       </div>
@@ -171,13 +171,13 @@ export default function InvoicesPage() {
           placeholder="Search invoice or vendor"
           value={searchParams.get('q') ?? ''}
           onChange={(event) => updateParams({ q: event.target.value || null })}
-          className="h-7 w-[210px] text-[11px]"
+          className="h-9 w-[210px] text-[13px]"
         />
         <Select
           value={vendor}
           onValueChange={(value) => updateParams({ vendor: value === 'all' ? null : value })}
         >
-          <SelectTrigger size="sm" aria-label="Filter by vendor" className="h-7 w-[210px] text-[11px]">
+          <SelectTrigger size="sm" aria-label="Filter by vendor" className="h-9 w-[210px] text-[13px]">
             <SelectValue placeholder="Vendor: All" />
           </SelectTrigger>
           <SelectContent>
@@ -186,29 +186,28 @@ export default function InvoicesPage() {
           </SelectContent>
         </Select>
         <span className="grow" />
-        <span className="text-[10px] text-muted-foreground">{invoices.length} invoices</span>
+        <span className="text-[12.5px] text-muted-foreground">{invoices.length} invoices</span>
       </div>
 
       <div className="overflow-hidden rounded-lg border bg-card">
-        <Table className="text-[11px]">
+        <Table className="text-[13px]">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-8" />
+              <TableHead className="w-8 max-[1200px]:hidden" />
               <TableHead className={HEAD}>Invoice #</TableHead>
               <TableHead className={HEAD}>Vendor</TableHead>
-              <TableHead className={HEAD}>Invoice date</TableHead>
-              <TableHead className={HEAD}>Due date</TableHead>
+              <TableHead className={HEAD}>Dates</TableHead>
               <TableHead className={`${HEAD} text-right`}>Amount</TableHead>
-              <TableHead className={HEAD}>PO</TableHead>
-              <TableHead className={HEAD}>GRN</TableHead>
               <TableHead className={HEAD}>Link status</TableHead>
               <TableHead className={`${HEAD} text-right`}>Actions</TableHead>
+              <TableHead className={`${HEAD} max-[1200px]:hidden`}>PO</TableHead>
+              <TableHead className={`${HEAD} max-[1200px]:hidden`}>GRN</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filtered.length === 0 && (
               <TableRow>
-                <TableCell colSpan={10} className="p-0">
+                <TableCell colSpan={9} className="p-0">
                   <EmptyState title="No invoices match this filter." />
                 </TableCell>
               </TableRow>
@@ -221,7 +220,7 @@ export default function InvoicesPage() {
                     ref={(node) => { rowRefs.current[invoice.id] = node }}
                     className={cn(flashed === invoice.id && 'animate-pulse ring-2 ring-primary ring-inset')}
                   >
-                    <TableCell>
+                    <TableCell className="max-[1200px]:hidden">
                       <Button
                         variant="ghost"
                         size="iconSm"
@@ -233,22 +232,14 @@ export default function InvoicesPage() {
                     </TableCell>
                     <TableCell>
                       <div className="font-semibold">{invoice.no}</div>
-                      <div className="mt-px text-[10px] text-muted-foreground">{invoice.id}</div>
+                      <div className="mt-px text-[12.5px] text-muted-foreground">{invoice.id}</div>
                     </TableCell>
                     <TableCell>{invoice.vendor}</TableCell>
-                    <TableCell className="text-muted-foreground tabular-nums">{invoice.date}</TableCell>
-                    <TableCell className="tabular-nums">{invoice.due}</TableCell>
+                    <TableCell>
+                      <div className="tabular-nums">{invoice.date}</div>
+                      <div className="mt-px text-[12.5px] text-muted-foreground tabular-nums">Due {invoice.due}</div>
+                    </TableCell>
                     <TableCell className="text-right tabular-nums">{money(invoice.amount)}</TableCell>
-                    <TableCell>
-                      {invoice.po
-                        ? <Badge variant="info">{invoice.po}</Badge>
-                        : <Badge variant="warning">Missing</Badge>}
-                    </TableCell>
-                    <TableCell>
-                      {invoice.grn
-                        ? <Badge variant="warning">{invoice.grn}</Badge>
-                        : <Badge variant="warning">Missing</Badge>}
-                    </TableCell>
                     <TableCell><StatusBadge status={invoice.status} /></TableCell>
                     <TableCell>
                       <div className="flex justify-end">
@@ -256,16 +247,27 @@ export default function InvoicesPage() {
                           size="xs"
                           disabled={!ready || runMatch.isPending}
                           title={runTitle(invoice.status)}
+                          aria-label={`Run match for ${invoice.no}`}
                           onClick={() => run(invoice)}
                         >
-                          <Play />Run match
+                          <Play /><span className="hidden min-[1200px]:inline">Run match</span>
                         </Button>
                       </div>
+                    </TableCell>
+                    <TableCell className="max-[900px]:hidden">
+                      {invoice.po
+                        ? <Badge variant="info">{invoice.po}</Badge>
+                        : <Badge variant="warning">Missing</Badge>}
+                    </TableCell>
+                    <TableCell className="max-[900px]:hidden">
+                      {invoice.grn
+                        ? <Badge variant="warning">{invoice.grn}</Badge>
+                        : <Badge variant="warning">Missing</Badge>}
                     </TableCell>
                   </TableRow>
                   {expanded.includes(invoice.id) && (
                     <TableRow className="bg-muted/20 hover:bg-muted/20">
-                      <TableCell colSpan={10} className="whitespace-normal p-0">
+                      <TableCell colSpan={9} className="whitespace-normal p-0">
                         <InvoiceChain invoice={invoice} />
                       </TableCell>
                     </TableRow>

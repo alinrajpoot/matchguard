@@ -17,9 +17,9 @@ import { ImpactPreview } from './ImpactPreview'
 import { ThresholdsCard } from './ThresholdsCard'
 
 const CARD = 'rounded-lg border bg-card'
-const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-3 py-2'
-const CARD_TITLE = 'text-[12.5px] font-semibold'
-const MINI_ROW = 'flex items-center justify-between gap-2 border-b py-1.5 text-[11px] last:border-0'
+const CARD_HEAD = 'flex items-center justify-between gap-2 border-b px-4 py-2.5'
+const CARD_TITLE = 'text-[15px] font-semibold whitespace-nowrap'
+const MINI_ROW = 'flex items-center justify-between gap-2 border-b py-1.5 text-[13px] last:border-0'
 
 const GROUPS = [
   {
@@ -126,8 +126,8 @@ function PolicyForm({ policy }: { policy: Policy }) {
         </>}
       />
 
-      <div className="grid grid-cols-[minmax(0,1fr)_300px] items-start gap-[9px] max-[900px]:grid-cols-1">
-        <div className="grid min-w-0 gap-[9px]">
+      <div className="grid grid-cols-1 items-start gap-2.5 min-[1200px]:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="grid min-w-0 grid-cols-1 gap-[9px]">
           <ThresholdsCard form={form} />
 
           {GROUPS.map((group) => (
@@ -159,7 +159,7 @@ function PolicyForm({ policy }: { policy: Policy }) {
               {policy.history.map((entry) => (
                 <div
                   key={entry.v}
-                  className="flex justify-between gap-2 border-b py-1 text-[10.5px] last:border-0"
+                  className="flex justify-between gap-2 border-b py-1 text-[13px] last:border-0"
                 >
                   <span>v{entry.v} · {entry.note}</span>
                   <span className="text-muted-foreground">{entry.date}</span>

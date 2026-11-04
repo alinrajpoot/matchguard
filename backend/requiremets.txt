@@ -1,0 +1,12 @@
+fastapi[standard]
+uvicorn
+sqlalchemy[asyncio]
+asyncpg
+alembic
+pydantic-settings
+boto3
+pinecone
+langgraph
+langchain-aws
+docling
+python-multipart

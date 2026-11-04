@@ -17,8 +17,8 @@ import { cn } from '@/lib/utils'
 import type { AuditEvent } from '@/schemas/domain'
 import { AuditEvidenceDialog } from './AuditEvidenceDialog'
 
-const HEAD = 'text-[9px] uppercase tracking-[0.04em] text-muted-foreground'
-const SELECT = 'h-7 rounded-md border border-input bg-transparent px-2 text-[11px] shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none'
+const HEAD = 'text-[12px] uppercase tracking-[0.05em] text-muted-foreground'
+const SELECT = 'h-9 rounded-md border border-input bg-transparent px-2 text-[13px] shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none'
 
 export default function AuditPage() {
   const { data, isLoading, isError, refetch } = useAudit()
@@ -69,7 +69,7 @@ export default function AuditPage() {
           placeholder="Search log"
           value={searchParams.get('q') ?? ''}
           onChange={(event) => updateParams({ q: event.target.value || null })}
-          className="h-7 w-[220px] text-[11px]"
+          className="h-9 w-[220px] text-[13px]"
         />
         <span className="grow" />
         <Button
@@ -82,7 +82,7 @@ export default function AuditPage() {
       </div>
 
       <div className="overflow-hidden rounded-lg border bg-card">
-        <Table className="text-[11px]">
+        <Table className="text-[13px]">
           <TableHeader>
             <TableRow>
               <TableHead className={HEAD}>Timestamp (UTC)</TableHead>
@@ -102,17 +102,17 @@ export default function AuditPage() {
             )}
             {rows.map((event) => (
               <TableRow key={event.id}>
-                <TableCell className="mono text-[10px] text-muted-foreground">{event.ts}</TableCell>
+                <TableCell className="mono text-[12.5px] text-muted-foreground">{event.ts}</TableCell>
                 <TableCell>
                   <Badge variant={event.actor === 'You' ? 'accent' : 'neutral'}>{event.actor}</Badge>
                 </TableCell>
                 <TableCell>{event.action}</TableCell>
-                <TableCell className="mono text-[10px]">{event.object}</TableCell>
+                <TableCell className="mono text-[12.5px]">{event.object}</TableCell>
                 <TableCell className="text-right">
                   <Button
                     variant="link"
                     size="xs"
-                    className="h-auto p-0 text-[10.5px] font-semibold"
+                    className="h-auto p-0 text-[13px] font-semibold"
                     onClick={() => setSelected(event)}
                   >
                     View
@@ -124,7 +124,7 @@ export default function AuditPage() {
         </Table>
       </div>
 
-      <p className="mt-[7px] text-[10px] text-muted-foreground">
+      <p className="mt-[7px] text-[12.5px] text-muted-foreground">
         Audit logs are append-only and retained for 7 years. Table: <span className="mono">audit_log</span>
         {' · '}API: <span className="mono">GET /api/v1/audit</span>.
       </p>

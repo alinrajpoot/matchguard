@@ -8,12 +8,12 @@ export function PageHeader({ title, subtitle, chips = [], actions }: {
   actions?: ReactNode
 }) {
   return (
-    <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
-      <div>
-        <h1 className="text-[19px] font-semibold tracking-[-0.02em]">{title}</h1>
-        <p className="mt-0.5 text-[11.5px] text-muted-foreground">{subtitle}</p>
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+      <div className="min-w-0">
+        <h1 className="text-[24px] font-bold leading-[1.15] tracking-[-0.03em]">{title}</h1>
+        <p className="mt-1 text-[13.5px] text-muted-foreground">{subtitle}</p>
       </div>
-      <div className="flex flex-wrap items-center justify-end gap-1.5">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         {chips.map((chip) => <InfraChip key={chip} service={chip} />)}
         {actions}
       </div>

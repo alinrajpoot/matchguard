@@ -14,7 +14,7 @@ export function InfraChip({ service, resource, label }: { service: string; resou
     <Button
       variant="outline"
       size="xs"
-      className="max-w-[220px] font-medium text-muted-foreground"
+      className="max-w-[230px] font-medium text-secondary-foreground/90"
       title={`${entry.name} · ${entry.note}`}
       onClick={() => openInfra(service, resource ?? entry.res)}
     >

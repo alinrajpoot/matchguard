@@ -51,24 +51,24 @@ export function GlobalSearch() {
     <Popover open={open && Boolean(query.trim() || focused)} onOpenChange={setOpen}>
       <PopoverAnchor asChild>
         <div className="relative">
-          <Search className="pointer-events-none absolute left-2 top-2 size-4 text-muted-foreground" />
+          <Search className="pointer-events-none absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
           <input
             ref={inputRef}
             value={query}
             onChange={(event) => { setQuery(event.target.value); setOpen(true) }}
             onFocus={() => { setFocused(true); setOpen(true) }}
             onBlur={() => setFocused(false)}
-            placeholder="Search documents, invoices, matches"
+            placeholder="Search workspace"
             aria-label="Global search"
-            className="h-7 w-[252px] rounded-md border border-input bg-background pl-7 pr-9 text-[11.5px] outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/10"
+            className="h-9 w-[300px] rounded-md border border-input bg-background pl-8 pr-11 text-[13px] outline-none transition-[color,box-shadow] placeholder:text-muted-foreground focus:border-primary focus:ring-[3px] focus:ring-primary/10"
           />
-          <kbd className="pointer-events-none absolute right-1.5 top-1.5 rounded border bg-card px-1 text-[9px] text-muted-foreground">⌘K</kbd>
+          <kbd className="pointer-events-none absolute right-2 top-2 rounded border bg-card px-1.5 py-0.5 text-[12px] leading-none text-muted-foreground">⌘K</kbd>
         </div>
       </PopoverAnchor>
       <PopoverContent align="end" className="w-[370px] p-1" onOpenAutoFocus={(e) => e.preventDefault()}>
         <Command shouldFilter={false}>
           <CommandList>
-            <CommandEmpty className="py-4 text-center text-[11.5px] text-muted-foreground">
+            <CommandEmpty className="py-4 text-center text-[13px] text-muted-foreground">
               No matches for “{query}”.
             </CommandEmpty>
             {groups.map((group) => (
@@ -78,10 +78,10 @@ export function GlobalSearch() {
                     key={`${item.type}-${item.id}`}
                     value={`${item.type}-${item.id}`}
                     onSelect={() => choose(item.type, item.id)}
-                    className="text-[11.5px]"
+                    className="text-[13px]"
                   >
                     <span className="flex-1 truncate">{item.label}</span>
-                    <span className="ml-auto truncate text-[9px] uppercase tracking-wide text-muted-foreground">{item.sub}</span>
+                    <span className="ml-auto truncate text-[12px] uppercase tracking-wide text-muted-foreground">{item.sub}</span>
                   </CommandItem>
                 ))}
               </CommandGroup>

@@ -15,11 +15,11 @@ export function DonutChart({ parts, total }: { parts: DonutPart[]; total: number
   return (
     <>
       <div className="mb-[7px]">
-        <h3 className="text-[12.5px] font-semibold">Document pipeline</h3>
-        <div className="mt-px text-[10px] text-muted-foreground">S3 → IDP/NER → Pinecone</div>
+        <h3 className="text-[15px] font-semibold">Document pipeline</h3>
+        <div className="mt-px text-[12.5px] text-muted-foreground">S3 → IDP/NER → Pinecone</div>
       </div>
       <div className="flex items-center gap-3">
-        <svg className="h-[108px] w-[108px] shrink-0" viewBox="0 0 120 120" role="img" aria-label={ariaLabel}>
+        <svg className="h-[120px] w-[120px] shrink-0" viewBox="0 0 120 120" role="img" aria-label={ariaLabel}>
           {parts.map((part, index) => {
             const len = C * (part.value / sum)
             const visible = Math.max(0, len - (len > 4 ? 2 : 0))
@@ -40,10 +40,10 @@ export function DonutChart({ parts, total }: { parts: DonutPart[]; total: number
               </circle>
             )
           })}
-          <text x="60" y="57" textAnchor="middle" className="fill-foreground text-[12px] font-bold">{total.toLocaleString()}</text>
-          <text x="60" y="69" textAnchor="middle" className="fill-muted-foreground text-[6.5px] uppercase tracking-[0.06em]">documents</text>
+          <text x="60" y="56" textAnchor="middle" className="fill-foreground text-[14px] font-bold">{total.toLocaleString()}</text>
+          <text x="60" y="72" textAnchor="middle" className="fill-muted-foreground text-[12px] uppercase tracking-[0.06em]">documents</text>
         </svg>
-        <div className="grid min-w-0 gap-[5px] text-[10px] text-secondary-foreground">
+        <div className="grid min-w-0 gap-[5px] text-[12.5px] text-secondary-foreground">
           {parts.map((part) => (
             <div key={part.label} className="flex items-center justify-between gap-[10px]">
               <span>{part.label}</span>

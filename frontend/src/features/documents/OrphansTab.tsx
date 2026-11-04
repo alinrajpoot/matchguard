@@ -18,7 +18,7 @@ import { s3Key } from '@/lib/s3'
 import type { Document } from '@/schemas/domain'
 import { useUiStore } from '@/stores/ui-store'
 
-const HEAD = 'text-[9px] uppercase tracking-[0.04em] text-muted-foreground'
+const HEAD = 'text-[12px] uppercase tracking-[0.05em] text-muted-foreground'
 
 export function OrphansTab({ docs, onView }: { docs: Document[]; onView: (doc: Document) => void }) {
   const [selected, setSelected] = useState<string[]>([])
@@ -53,7 +53,7 @@ export function OrphansTab({ docs, onView }: { docs: Document[]; onView: (doc: D
 
   return (
     <>
-      <div className="mb-[9px] flex items-start gap-2 rounded-lg border border-[#fedf89] bg-[#fffcf5] px-[11px] py-[9px] text-[11.5px] text-[#93370d]">
+      <div className="mb-[9px] flex items-start gap-2 rounded-lg border border-warning/30 bg-warning-bg/60 px-3.5 py-3 text-[13px] text-warning">
         <CircleAlert className="mt-px size-4 shrink-0" />
         <div>
           <b>Orphan documents</b> are files that never linked to an invoice, PO or GRN. They stay in
@@ -62,9 +62,9 @@ export function OrphansTab({ docs, onView }: { docs: Document[]; onView: (doc: D
       </div>
 
       <div className="overflow-hidden rounded-lg border bg-card">
-        <div className="flex items-center justify-between gap-2 border-b px-3 py-2">
+        <div className="flex items-center justify-between gap-2 border-b px-4 py-2.5">
           <div className="flex items-center gap-1.5">
-            <h3 className="text-[12.5px] font-semibold">Orphans</h3>
+            <h3 className="text-[15px] font-semibold">Orphans</h3>
             <Badge variant="warning">{docs.length}</Badge>
           </div>
           <Button variant="outline" size="xs" onClick={() => requestDelete(selected)}>
@@ -72,7 +72,7 @@ export function OrphansTab({ docs, onView }: { docs: Document[]; onView: (doc: D
           </Button>
         </div>
 
-        <Table className="text-[11px]">
+        <Table className="text-[13px]">
           <TableHeader>
             <TableRow>
               <TableHead className="w-8" />
@@ -106,7 +106,7 @@ export function OrphansTab({ docs, onView }: { docs: Document[]; onView: (doc: D
                 </TableCell>
                 <TableCell>
                   <div className="font-semibold">{doc.file}</div>
-                  <div className="mt-px text-[10px] text-muted-foreground">{doc.id}</div>
+                  <div className="mt-px text-[12.5px] text-muted-foreground">{doc.id}</div>
                 </TableCell>
                 <TableCell><TypeBadge type={doc.type} /></TableCell>
                 <TableCell>{doc.vendor}</TableCell>

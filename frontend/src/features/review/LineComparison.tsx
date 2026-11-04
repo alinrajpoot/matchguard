@@ -36,7 +36,7 @@ export function LineComparison({ invoice, lines }: { invoice: string; lines: Lin
           {HEADINGS.map((heading) => (
             <div
               key={heading || 'chevron'}
-              className="border-b bg-muted/40 text-[9px] font-semibold uppercase tracking-[0.055em] text-muted-foreground last:border-0"
+              className="border-b bg-muted/40 text-[12px] font-semibold uppercase tracking-[0.055em] text-muted-foreground last:border-0"
             >
               {heading}
             </div>
@@ -47,29 +47,29 @@ export function LineComparison({ invoice, lines }: { invoice: string; lines: Lin
           const variance = ((line.invPrice - line.poPrice) / line.poPrice) * 100
           const delta = (line.invPrice - line.poPrice) * line.invQty
           return (
-            <div key={line.sku} className={cn('border-b last:border-0', line.flag && 'bg-[#fffcf5]')}>
+            <div key={line.sku} className={cn('border-b last:border-0', line.flag && 'bg-warning-bg/60')}>
               <div className={GRID}>
                 <div>
                   <div className="flex items-center gap-1 font-semibold">
                     {line.flag && <AlertTriangle className="size-3.5 shrink-0 text-warning" />}
                     {line.sku}
                   </div>
-                  <div className="mt-px text-[10px] text-muted-foreground">{line.desc}</div>
+                  <div className="mt-px text-[12.5px] text-muted-foreground">{line.desc}</div>
                 </div>
 
                 <div className="tabular-nums">
-                  <div className="text-[11px]">{line.poQty} × {money(line.poPrice)}</div>
-                  <div className="text-[10.5px] font-semibold">{money(line.poQty * line.poPrice)}</div>
+                  <div className="text-[13px]">{line.poQty} × {money(line.poPrice)}</div>
+                  <div className="text-[13px] font-semibold">{money(line.poQty * line.poPrice)}</div>
                 </div>
 
                 <div className="tabular-nums">
-                  <div className="text-[11px]">{line.grnQty} × {money(line.poPrice)}</div>
-                  <div className="text-[10.5px] font-semibold">{money(line.grnQty * line.poPrice)}</div>
+                  <div className="text-[13px]">{line.grnQty} × {money(line.poPrice)}</div>
+                  <div className="text-[13px] font-semibold">{money(line.grnQty * line.poPrice)}</div>
                 </div>
 
                 <div className="tabular-nums">
-                  <div className="text-[11px]">{line.invQty} × {money(line.invPrice)}</div>
-                  <div className="text-[10.5px] font-semibold">{money(line.invQty * line.invPrice)}</div>
+                  <div className="text-[13px]">{line.invQty} × {money(line.invPrice)}</div>
+                  <div className="text-[13px] font-semibold">{money(line.invQty * line.invPrice)}</div>
                   {line.flag && (
                     <div className="mt-px flex flex-wrap gap-1">
                       <Badge variant="warning">{signedPercent(variance)}</Badge>
@@ -95,9 +95,9 @@ export function LineComparison({ invoice, lines }: { invoice: string; lines: Lin
               </div>
 
               {open.includes(index) && (
-                <div className="border-t bg-muted/40 px-2.5 py-1.5 text-[10px] text-muted-foreground">
+                <div className="border-t bg-muted/40 px-2.5 py-1.5 text-[12.5px] text-muted-foreground">
                   <b>Evidence</b> ·{' '}
-                  <code className="rounded border bg-card px-1 font-mono text-[9.5px]">invoice_{invoice}.pdf</code>
+                  <code className="rounded border bg-card px-1 font-mono text-[12px]">invoice_{invoice}.pdf</code>
                   {' '}p.{index < 1 ? 2 : 1} · Pinecone chunk {index + 3}/8 · Nova Lite confidence{' '}
                   {(line.conf / 100).toFixed(2)}
                   {line.flag && (
@@ -111,7 +111,7 @@ export function LineComparison({ invoice, lines }: { invoice: string; lines: Lin
           )
         })}
 
-        <div className="flex items-center justify-between border-t px-2.5 py-2 text-[11px] font-semibold">
+        <div className="flex items-center justify-between border-t px-2.5 py-2 text-[13px] font-semibold">
           <span>Total variance</span>
           <Badge variant={totalDelta > 0 ? 'danger' : 'success'}>
             {signedMoney(totalDelta)} · {signedPercent(totalPercent)}

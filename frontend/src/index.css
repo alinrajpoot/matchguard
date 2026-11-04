@@ -4,42 +4,46 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f6f7f9;
-  --foreground: #101828;
+  /* Brand palette sampled from the MatchGuard logo */
+  --brand-blue: #005dfc;
+  --brand-navy: #01173e;
+
+  --background: #f3f6fb;
+  --foreground: #0b1f3a;
   --card: #ffffff;
-  --card-foreground: #101828;
+  --card-foreground: #0b1f3a;
   --popover: #ffffff;
-  --popover-foreground: #101828;
-  --primary: #4f46e5;
+  --popover-foreground: #0b1f3a;
+  --primary: #005dfc;
   --primary-foreground: #ffffff;
-  --secondary: #f2f4f7;
-  --secondary-foreground: #344054;
-  --muted: #f2f4f7;
-  --muted-foreground: #667085;
-  --accent: #eef2ff;
-  --accent-foreground: #4338ca;
-  --destructive: #b42318;
+  --secondary: #eaf0fa;
+  --secondary-foreground: #1c3557;
+  --muted: #eef3fa;
+  --muted-foreground: #56697f;
+  --accent: #e4edff;
+  --accent-foreground: #0043b8;
+  --destructive: #c0271b;
   --destructive-foreground: #ffffff;
-  --border: #e4e7ec;
-  --input: #d0d5dd;
-  --ring: #4f46e5;
-  --radius: 0.5rem;
+  --border: #dbe4f1;
+  --input: #c7d4e6;
+  --ring: #005dfc;
+  --radius: 0.625rem;
 
   --success: #067647;
-  --success-bg: #ecfdf3;
-  --warning: #b54708;
-  --warning-bg: #fffaeb;
+  --success-bg: #e9f9f1;
+  --warning: #a15c07;
+  --warning-bg: #fff5e5;
   --danger: #b42318;
-  --danger-bg: #fef3f2;
-  --info: #026aa2;
-  --info-bg: #f0f9ff;
+  --danger-bg: #fdf0ee;
+  --info: #0049c7;
+  --info-bg: #e8f0ff;
 
-  --chart-ok: #10b981;
-  --chart-warn: #f59e0b;
-  --chart-bad: #f43f5e;
-  --chart-info: #0ea5e9;
-  --chart-acc: #4f46e5;
-  --chart-neutral: #98a2b3;
+  --chart-ok: #0e9f6e;
+  --chart-warn: #e2a03a;
+  --chart-bad: #e5484d;
+  --chart-info: #2f8fdb;
+  --chart-acc: #005dfc;
+  --chart-neutral: #94a3b8;
 }
 
 @theme inline {
@@ -79,28 +83,115 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --font-sans: "Quicksand", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* A small step up from Tailwind defaults so dense screens stay legible */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-size: 13px;
-    line-height: 1.45;
-    font-feature-settings: 'cv11', 'ss03';
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    letter-spacing: -0.002em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+
   h1, h2, h3, h4, p {
     margin: 0;
   }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
   button, input, select, textarea {
     font: inherit;
     color: inherit;
+  }
+
+  /* Tailwind v4 resets button cursor to default — put the affordance back. */
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]),
+  [role="option"],
+  [role="menuitem"],
+  [role="checkbox"],
+  [role="switch"],
+  summary,
+  label[for],
+  select:not(:disabled),
+  [data-slot="select-trigger"],
+  [data-slot="checkbox"],
+  [data-slot="switch"],
+  [data-slot="slider-thumb"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #b9c8dd transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #c6d3e5;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #a9bcd6;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 }
 
